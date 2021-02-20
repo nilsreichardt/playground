@@ -22,7 +22,7 @@ jobs:
 
       - name: Install cider
         run: |
-          export PUB_ENV="$HOME/.pub-cache/bin"
+          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
           dart pub global activate cider
         
       - name: Increase version
