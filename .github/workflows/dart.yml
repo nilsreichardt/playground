@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install cider
-        run: pub global activate cider
+        run: dart pub global activate cider
         
       - name: Increase version
         run: cider bump minor
