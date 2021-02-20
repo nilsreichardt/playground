@@ -21,7 +21,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install cider
-        run: dart pub global activate cider
+        run: |
+          export PATH="$PATH":"$HOME/.pub-cache/bin"
+          dart pub global activate cider
         
       - name: Increase version
         run: cider bump minor
