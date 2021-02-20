@@ -1,0 +1,33 @@
+name: Dart
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Note that this workflow uses the latest stable version of the Dart SDK.
+    # Docker images for other release channels - like dev and beta - are also
+    # available. See https://hub.docker.com/r/google/dart/ for the available
+    # images.
+    container:
+      image:  google/dart:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install cider
+        run: pub global activate cider
+        
+      - name: Increase version
+        run: cider bump minor
+        
+      - name: Commit & Push version change
+        run: |
+          git add .
+          git commit -m "pump version"
+          git push
