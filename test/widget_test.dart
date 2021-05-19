@@ -1,25 +1,30 @@
+// This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility that Flutter provides. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
+
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
+
+import 'package:fix/main.dart';
 
 void main() {
-    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets('DocumentReference', () async {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MyApp());
 
-    final name = 'foo';
-    final firebaseOptions = const FirebaseOptions(
-      appId: '1:448618578101:ios:0b650370bb29e29cac3efc',
-      apiKey: 'AIzaSyAgUhHU8wSJgO5MVNy95tMT07NEjzMOfz0',
-      projectId: 'react-native-firebase-testing',
-      messagingSenderId: '448618578101',
-    );
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
 
-    await Firebase.initializeApp(name: name, options: firebaseOptions);
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-    final ref1 = FirebaseFirestore.instance.collection('test').doc('doc1');
-    final ref2 = FirebaseFirestore.instance.collection('test').doc('doc1');
-
-    expect(ref1, ref2);
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
   });
 }
-
-ex
