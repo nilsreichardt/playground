@@ -30,8 +30,7 @@ jobs:
         
       - name: Commit & Push version change
         run: |
-          git config --global user.email "github@sharezone.net"
-          git config --global user.name "GitHub"
+          git config user.name "github-actions"
           git add .
-          git commit -m "pump version"
+          git commit -m "chore: pump version"
           git push
