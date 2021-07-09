@@ -10,7 +10,7 @@ env:
 jobs:
   move-new-p0-issue-to-urgent-items:
     # Only issue with an P0 label should be moved to the urgent column
-    if: ${{ github.event.label.name == 'P0' }}
+    if: ${{ github.event.label.*.name == 'P0' }}
     runs-on: ubuntu-latest
     steps:
       - uses: alex-page/github-project-automation-plus@v0.8.0
