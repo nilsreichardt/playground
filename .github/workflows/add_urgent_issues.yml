@@ -1,4 +1,4 @@
-  name: new-issue-automation
+name: new-issue-automation
 
 on:
   issues:
