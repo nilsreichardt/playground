@@ -1,6 +1,4 @@
-on:
-  issues:
-    types: [opened]
+on: [ push ]
 
 jobs:
   one:
