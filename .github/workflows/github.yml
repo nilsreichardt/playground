@@ -31,6 +31,6 @@ jobs:
 
   two:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request == false }}
+    if: ${{ contains(github.ref, 'main') }}
     steps:
     - run: echo "hallo"
