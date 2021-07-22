@@ -28,3 +28,9 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+
+  two:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request == false }}
+    steps:
+    - run: echo "hallo"
