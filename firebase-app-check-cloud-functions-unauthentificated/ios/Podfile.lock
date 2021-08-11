@@ -3,14 +3,25 @@ PODS:
     - Firebase/Functions (= 8.3.0)
     - firebase_core
     - Flutter
+  - Firebase/AppCheck (8.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAppCheck (~> 8.3.0-beta)
   - Firebase/CoreOnly (8.3.0):
     - FirebaseCore (= 8.3.0)
   - Firebase/Functions (8.3.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 8.3.0)
+  - firebase_app_check (0.0.1-3):
+    - Firebase/AppCheck (= 8.3.0)
+    - firebase_core
+    - Flutter
   - firebase_core (1.4.0):
     - Firebase/CoreOnly (= 8.3.0)
     - Flutter
+  - FirebaseAppCheck (8.3.0-beta):
+    - FirebaseCore (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - PromisesObjC (~> 1.2)
   - FirebaseCore (8.3.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -42,12 +53,14 @@ PODS:
 
 DEPENDENCIES:
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
+  - firebase_app_check (from `.symlinks/plugins/firebase_app_check/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseAppCheck
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFunctions
@@ -60,6 +73,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   cloud_functions:
     :path: ".symlinks/plugins/cloud_functions/ios"
+  firebase_app_check:
+    :path: ".symlinks/plugins/firebase_app_check/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
@@ -68,7 +83,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   cloud_functions: 3c28b449603cc0be688d37a15f9feee5880fca8b
   Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
+  firebase_app_check: 3faaac0776476d46405cd404cdf5ce7e1536bf79
   firebase_core: 72374607c8c6f5a0adc0559e5c5bf57deda975e3
+  FirebaseAppCheck: 157ef81c5500ed96aeba44983c9eaa98a6371f99
   FirebaseCore: a6dba751680d7033b9d3831e1cfc95ead0605118
   FirebaseCoreDiagnostics: 7bf55d386f9fc690d971b70a582142321a390eb8
   FirebaseFunctions: f391cdeef45d2e85ef4e16a6ecca05f30e162c41
