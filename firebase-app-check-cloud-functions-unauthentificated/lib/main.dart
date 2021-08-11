@@ -25,8 +25,10 @@ class MyApp extends StatelessWidget {
                   .httpsCallable('helloWorld')
                   .call<String>(),
               builder: (context, future) {
-                if (future.hasError)
+                if (future.hasError) {
+                  print(future.error);
                   return Text(future.error?.toString() ?? "Error");
+                }
 
                 if (!future.hasData) return CircularProgressIndicator();
 
