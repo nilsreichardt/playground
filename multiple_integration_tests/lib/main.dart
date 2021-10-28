@@ -1,14 +1,14 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
+Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+}
+
+Future<void> main() async {
+  await init();
   runApp(const MyApp());
 }
 
@@ -18,31 +18,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Firebase Auth Demo',
       home: Scaffold(
-        appBar: AppBar(title: const Text("Firebase Auth Web Bug")),
+        appBar: AppBar(title: const Text("Firebase Auth")),
         body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text("Signed in."),
-                    const SizedBox(height: 18),
-                    const Divider(),
-                    TextButton(
-                      onPressed: () => FirebaseAuth.instance.signOut(),
-                      child: const Text("Sign out"),
-                    )
-                  ],
-                ),
-              );
-            }
+            if (snapshot.hasData) return const _AuthenticatedView();
             return _Login();
           },
         ),
+      ),
+    );
+  }
+}
+
+class _AuthenticatedView extends StatelessWidget {
+  const _AuthenticatedView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      key: const Key('authenticated-view'),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text("Signed in."),
+          const SizedBox(height: 18),
+          const Divider(),
+          TextButton(
+            onPressed: () => FirebaseAuth.instance.signOut(),
+            child: const Text("Sign out"),
+          )
+        ],
       ),
     );
   }
@@ -65,10 +74,12 @@ class __LoginState extends State<_Login> {
       child: Column(
         children: [
           TextField(
+            key: const Key('email-field'),
             onChanged: (e) => email = e,
             decoration: const InputDecoration(labelText: 'Email'),
           ),
           TextField(
+            key: const Key('password-field'),
             onChanged: (p) => password = p,
             decoration: const InputDecoration(labelText: 'Password'),
           ),
@@ -76,6 +87,7 @@ class __LoginState extends State<_Login> {
             const CircularProgressIndicator()
           else
             TextButton(
+              key: const Key('login-button'),
               onPressed: () {
                 setState(() => isLoading = true);
                 FirebaseAuth.instance.signInWithEmailAndPassword(
