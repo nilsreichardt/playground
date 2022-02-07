@@ -11,7 +11,7 @@ it('test 1', async () => {
     await chai.expect(reject42()).to.eventually.be.rejectedWith('4')
 });
 
-it('test 1', async () => {
+it('test 2', async () => {
     function reject42() {
         return Promise.reject(new Error('42'))
     }
