@@ -2,6 +2,7 @@
 
 # Ensure emulator is ready 
 sleep 15
+adb shell input keyevent 4
             
 # Start recording
 mkdir captures
@@ -16,7 +17,7 @@ adb shell pm grant com.android.camera2 android.permission.ACCESS_COARSE_LOCATION
 adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
 
 # Click next on welcome screen
-sleep 3
+sleep 4
 adb shell input keyevent 61
 sleep 1
 adb shell input keyevent 61
