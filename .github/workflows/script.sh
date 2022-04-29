@@ -10,19 +10,17 @@ adb shell screenrecord /sdcard/recording.mp4 &
 PID=$!
 echo $PID
 
-# Grant camera & location permission
-adb shell pm grant com.android.camera2 android.permission.ACCESS_COARSE_LOCATION
+# Download app
+curl -X GET -o "app.apk" "https://firebasestorage.googleapis.com/v0/b/nilsreichardt.appspot.com/o/mobile_scanner%2Fapp-release-2.apk?alt=media&token=3ff4fe70-3d23-4c7e-9849-edd622e7f7f1"
 
-# Open camera
-adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
+# Install app
+adb install app.apk
 
-# Click next on welcome screen
-sleep 4
-adb shell input keyevent 61
-sleep 1
-adb shell input keyevent 61
-sleep 1
-adb shell input keyevent 66
+# Grant permission
+adb shell pm grant dev.steenbakker.mobile_scanner_example android.permission.CAMERA
+
+# Open app
+adb shell am start -n dev.steenbakker.mobile_scanner_example/io.flutter.embedding.android.FlutterActivity
 
 # Make screenshots
 sleep 10
