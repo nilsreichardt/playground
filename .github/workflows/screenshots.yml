@@ -1,0 +1,49 @@
+name: Camera testing
+
+on: [ push ]
+
+jobs:
+  integration-test:
+    # Is recommended to run job with macOS to take advantage of hardware
+    # acceleration support provided by HAXM.
+    runs-on: macos-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [30]
+        target: [default, google_apis, playstore]
+        arch: [x86_64]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Java 15
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 15
+      - name: Open camera
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          profile: pixel_3a
+          emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back virtualscene -camera-front emulated
+          script: |
+            # Ensure emulator is ready 
+            sleep 10
+
+            # Open camera
+            adb shell am start -a android.media.action.IMAGE_CAPTURE
+            adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
+
+            # Make screenshots
+            mkdir screenshots
+            sleep 5
+            adb shell screencap -p > screenshot_$i.jpg
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: screenshots_${{ matrix.target }}_${{ matrix.arch }}_${{ matrix.api-level }}
+          path: ./screenshots
