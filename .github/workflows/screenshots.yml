@@ -40,7 +40,9 @@ jobs:
             # Click next on welcome screen
             sleep 2
             adb shell input tap 530 1960
+            adb shell pm list packages
             adb shell pm grant com.android.camera2 android.permission.CAMERA
+            adb shell pm grant com.android.camera android.permission.CAMERA
 
             # Go back home
             adb shell input keyevent 4
