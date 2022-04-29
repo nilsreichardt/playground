@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [28]
+        api-level: [32]
         target: [playstore]
         arch: [x86_64]
     steps:
@@ -51,7 +51,7 @@ jobs:
             adb shell input tap 530 1918
 
             # Make screenshots
-            sleep 5
+            sleep 15
             adb shell screencap -p > captures/1.jpg
 
             kill $RECORD_PID
