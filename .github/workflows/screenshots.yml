@@ -40,7 +40,7 @@ jobs:
             # Make screenshots
             mkdir screenshots
             sleep 5
-            adb shell screencap -p > screenshot_$i.jpg
+            adb shell screencap -p > screenshots/1.jpg
       - name: Upload screenshots
         uses: actions/upload-artifact@v1
         if: always()
