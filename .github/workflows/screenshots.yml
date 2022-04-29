@@ -37,6 +37,8 @@ jobs:
             # Start recording
             mkdir captures
             adb shell screenrecord /sdcard/recording.m4v &
+            PID=$!
+            echo $PID
 
             # Grant camera & location permission
             adb shell pm grant com.android.camera2 android.permission.ACCESS_COARSE_LOCATION
@@ -53,7 +55,8 @@ jobs:
             sleep 15
             adb shell screencap -p > captures/1.jpg
 
-            kill $$
+            kill -SIGHUP $PID
+            sleep 0.2
             adb pull /sdcard/recording.m4v ./captures
       - name: Upload captures
         uses: actions/upload-artifact@v1
