@@ -52,7 +52,7 @@ jobs:
 
             # Make screenshots
             sleep 5
-            adb shell screencap -p > screenshots/1.jpg
+            adb shell screencap -p > captures/1.jpg
 
             kill $RECORD_PID
             adb pull /sdcard/recording.m4v ./captures
