@@ -38,21 +38,21 @@ jobs:
             adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
 
             # Click next on welcome screen
-            adb shell input keyevent 61
-            adb shell input keyevent 61
-            adb shell input keyevent 61
-            adb shell input keyevent 61
-            adb shell input keyevent 66
+            sleep 2
+            adb shell input tap 530 1960
             adb shell pm grant com.android.camera2 android.permission.CAMERA
+
+            # Go back home
+            adb shell input keyevent 4
             adb shell input keyevent 4
 
-            # Open camera again
+            # Open camera again to ensure permissions are granted
             adb shell am start -a android.media.action.IMAGE_CAPTURE
             adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
 
             # Make screenshots
             mkdir screenshots
-            sleep 7
+            sleep 5
             adb shell screencap -p > screenshots/1.jpg
       - name: Upload screenshots
         uses: actions/upload-artifact@v1
