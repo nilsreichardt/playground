@@ -28,9 +28,6 @@ sleep 10
 adb shell screencap -p > captures/1.jpg
 
 # Stop recording
-killall -INT adb
-adb kill-server
-sleep 2
-adb start-server
-sleep 2
+kill $RECORD_PID
+sleep 1
 adb pull /sdcard/recording.mp4 ./captures
