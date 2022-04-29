@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure emulator is ready 
-sleep 5
+sleep 15
             
 # Start recording
 mkdir captures
@@ -28,6 +28,6 @@ sleep 10
 adb shell screencap -p > captures/1.jpg
 
 # Stop recording
-kill ${_PID} > /dev/null 2&>1
+kill $PID
 sleep 1
 adb pull /sdcard/recording.mp4 ./captures
