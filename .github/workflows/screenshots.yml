@@ -11,9 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [32, 31, 30, 29, 28, 27, 26, 25, 24]
+        api-level: [28]
         target: [playstore]
-        arch: [x86_64, x86, arm64-v8a]
+        arch: [x86_64]
     steps:
       - uses: actions/checkout@v3
       - name: Java 15
@@ -38,6 +38,7 @@ jobs:
             adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
 
             # Click next on welcome screen
+            adb shell input keyevent 61
             adb shell input keyevent 61
             adb shell input keyevent 61
             adb shell input keyevent 66
