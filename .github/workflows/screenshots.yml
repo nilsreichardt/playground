@@ -39,20 +39,12 @@ jobs:
 
             # Click next on welcome screen
             sleep 5
-            adb shell input tap 530 1960
+            adb shell input tap 530 1918
 
             # Grant camera & location permission
             adb shell pm grant com.android.camera2 android.permission.CAMERA
             adb shell pm grant com.android.camera2 android.permission.ACCESS_COARSE_LOCATION
             adb shell pm grant com.android.camera2 android.permission.ACCESS_FINE_LOCATION
-
-            # Go back home
-            adb shell input keyevent 4
-            adb shell input keyevent 4
-
-            # Open camera again to ensure permissions are granted
-            adb shell am start -a android.media.action.IMAGE_CAPTURE
-            adb shell am start -a android.media.action.STILL_IMAGE_CAMERA
 
             # Make screenshots
             mkdir screenshots
