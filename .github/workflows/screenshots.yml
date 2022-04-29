@@ -28,15 +28,19 @@ jobs:
           target: ${{ matrix.target }}
           arch: ${{ matrix.arch }}
           profile: pixel_3a
+          sdcard-path-or-size: 512M
           emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back virtualscene -camera-front emulated
           script: |
             # Ensure emulator is ready 
-            sleep 15
+            sleep 10
+            
+            # Start recording
+            mkdir captures
+            adb shell screenrecord /sdcard/recording.m4v &
+            RECORD_PID=$!
 
             # Grant camera & location permission
-            adb shell pm grant com.android.camera2 android.permission.CAMERA
             adb shell pm grant com.android.camera2 android.permission.ACCESS_COARSE_LOCATION
-            adb shell pm grant com.android.camera2 android.permission.ACCESS_FINE_LOCATION
 
             # Open camera
             adb shell am start -a android.media.action.IMAGE_CAPTURE
@@ -47,12 +51,14 @@ jobs:
             adb shell input tap 530 1918
 
             # Make screenshots
-            mkdir screenshots
             sleep 5
             adb shell screencap -p > screenshots/1.jpg
-      - name: Upload screenshots
+
+            kill $RECORD_PID
+            adb pull /sdcard/recording.m4v ./captures
+      - name: Upload captures
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: screenshots_${{ matrix.target }}_${{ matrix.arch }}_${{ matrix.api-level }}
-          path: ./screenshots
+          name: captures_${{ matrix.target }}_${{ matrix.arch }}_${{ matrix.api-level }}
+          path: ./captures
