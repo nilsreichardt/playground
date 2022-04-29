@@ -31,7 +31,7 @@ jobs:
           emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back virtualscene -camera-front emulated
           script: |
             # Ensure emulator is ready 
-            sleep 10
+            sleep 15
 
             # Open camera
             adb shell am start -a android.media.action.IMAGE_CAPTURE
