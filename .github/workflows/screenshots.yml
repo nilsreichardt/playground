@@ -29,6 +29,18 @@ jobs:
           arch: ${{ matrix.arch }}
           profile: pixel_3a
           sdcard-path-or-size: 512M
+          pre-emulator-launch-script: |
+            # Insert QR Code image from "integration_test/qr_code.jpg" into the Android
+            # camera emulator.
+            # 
+            # Source: https://stackoverflow.com/a/64922184/8358501
+            echo "" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            echo "poster qr_code" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            echo "size 2 2" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            echo "position 0 0 -1.8" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            echo "rotation 0 0 0" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            echo "default qr_code.jpg" >> ~/Library/Android/sdk/emulator/resources/Toren1BD.posters
+            mv example/qr_code.jpg ~/Library/Android/sdk/emulator/resources/
           emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back virtualscene -camera-front emulated
           script: .github/workflows/script.sh
       - name: Upload captures
