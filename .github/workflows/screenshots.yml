@@ -22,7 +22,7 @@ jobs:
           distribution: 'zulu'
           java-version: 15
       - name: Open camera
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: nilsreichardt/android-emulator-runner@hot-fix-pre-emulator-launch-script
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
