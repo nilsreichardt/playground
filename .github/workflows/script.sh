@@ -21,7 +21,7 @@ adb shell pm grant com.example.example android.permission.RECORD_AUDIO
 adb shell monkey -p com.example.example -c android.intent.category.LAUNCHER 1
 
 # Make screenshots
-sleep 10
+sleep 20
 adb shell screencap -p > captures/1.jpg
 
 # Stop recording
