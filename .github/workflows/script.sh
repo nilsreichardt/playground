@@ -18,7 +18,7 @@ adb shell pm grant com.example.example android.permission.CAMERA
 adb shell pm grant com.example.example android.permission.RECORD_AUDIO
 
 # Open app
-adb shell am start -n com.example.example/io.flutter.embedding.android.FlutterActivity
+adb shell monkey -p com.example.example -c android.intent.category.LAUNCHER 1
 
 # Make screenshots
 sleep 10
