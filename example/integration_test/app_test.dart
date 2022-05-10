@@ -1,23 +1,11 @@
-import 'package:example/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 void main() {
-  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-      as IntegrationTestWidgetsFlutterBinding;
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Example', () {
-    testWidgets('should show the counter app', (tester) async {
-      await tester.pumpWidget(const MyApp());
-
-      // This is required prior to taking the screenshot (Android only).
-      await binding.convertFlutterSurfaceToImage();
-
-      // Trigger a frame.
-      await tester.pumpAndSettle();
-      final bytes = await binding.takeScreenshot('screenshot-1');
-
-      await expectLater(bytes, matchesGoldenFile('screenshot-1.png'));
-    });
+  testWidgets('print the env', (tester) async {
+    print("From env 1: ${String.fromEnvironment('USER_1_EMAIL')}");
+    print("From env 2: ${const String.fromEnvironment('USER_1_EMAIL')}");
   });
 }
