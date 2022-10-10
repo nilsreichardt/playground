@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:integration_test_timeout/main.dart';
 
+// Run the integration test with `flutter test integration_test --timeout none`
+// or use the @Timeout annotation.
+
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
