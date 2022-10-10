@@ -6,6 +6,7 @@ import 'package:integration_test_timeout/main.dart';
 // Run the integration test with `flutter test integration_test --timeout none`
 // or use the @Timeout annotation.
 
+@Timeout(Duration(hours: 1))
 void main() {
   testWidgets(
     'Counter increments smoke test',
@@ -25,6 +26,5 @@ void main() {
       expect(find.text('0'), findsNothing);
       expect(find.text('1'), findsOneWidget);
     },
-    timeout: const Timeout(Duration(hours: 1)),
   );
 }
