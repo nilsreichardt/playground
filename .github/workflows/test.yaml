@@ -17,4 +17,4 @@ jobs:
         flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: Run Integration Test
       working-directory: integration_test_timeout 
-      run: flutter test integration_test -d macos --timeout none
+      run: flutter test integration_test -d macos --timeout 3600s
