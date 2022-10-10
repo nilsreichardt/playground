@@ -7,7 +7,7 @@ env:
   FLUTTER_VERSION: "3.3.4"
 
 jobs:
-  deploy:
+  integration-test:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
