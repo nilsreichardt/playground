@@ -11,8 +11,6 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: "integration-test-timeout"
     - name: Install Flutter
       uses: subosito/flutter-action@v1
       with:
