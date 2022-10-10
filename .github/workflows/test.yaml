@@ -1,0 +1,20 @@
+name: test
+
+on:
+  push:
+
+env:
+  FLUTTER_VERSION: "3.3.4"
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+    - name: Run Integration Test
+      working-directory: integration_test_timeout 
+      run: flutter test integration_test -d macos --timeout none
