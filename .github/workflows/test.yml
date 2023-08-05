@@ -6,10 +6,8 @@ on:
       ios-changelog:
         type: string
         description: |
-          The changelog for the iOS release. This will be used as the release
-          notes in the App Store release and is required to deploy a new iOS
-          version. If the changelog is not provided, the deployment for iOS will
-          be skipped.
+          iOS changelog: Used for the App Store release notes. If the changelog 
+          is not provided, the deployment for iOS will be skipped.
 
 jobs:
   deploy-ios:
