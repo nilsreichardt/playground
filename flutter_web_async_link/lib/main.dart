@@ -38,11 +38,11 @@ class MyApp extends StatelessWidget {
 
                     launchUrl(
                       Uri.parse(
-                          'https://github.com/nilsreichardt/playground/blob/main/flutter-web-async-link/lib/main.dart'),
+                          'https://github.com/nilsreichardt/playground/blob/main/flutter_web_async_link/lib/main.dart'),
                       webOnlyWindowName: '_self',
                     );
                   },
-                  child: const Text('Open my website'),
+                  child: const Text('Open code example'),
                 ),
               ],
             );

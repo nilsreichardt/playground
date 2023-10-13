@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "flutter-web-async-link-2",
-    "public": "flutter-web-async-link/build/web",
+    "public": "flutter_web_async_link/build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
