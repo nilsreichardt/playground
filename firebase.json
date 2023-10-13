@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "flutter-web-async-link-2",
+    "public": "flutter-web-async-link/build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
