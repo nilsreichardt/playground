@@ -34,10 +34,11 @@ class MyApp extends StatelessWidget {
                     );
 
                     // Simulate loading
-                    await Future.delayed(const Duration(seconds: 2));
+                    await Future.delayed(const Duration(seconds: 3));
 
                     launchUrl(
-                      Uri.parse('https://nils.re'),
+                      Uri.parse(
+                          'https://github.com/nilsreichardt/playground/blob/main/flutter-web-async-link/lib/main.dart'),
                       webOnlyWindowName: '_self',
                     );
                   },
