@@ -1,0 +1,24 @@
+{
+    "flutter": {
+        "platforms": {
+            "macos": {
+                "buildConfigurations": {
+                    "Debug": {
+                        "projectId": "sharezone-debug",
+                        "appId": "1:366164701221:ios:e27f7fe0ace89c1abfcfcc",
+                        "uploadDebugSymbols": false,
+                        "fileOutput": "macos/config/firebase/GoogleService-Info.plist"
+                    }
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "sharezone-debug",
+                    "configurations": {
+                        "macos": "1:366164701221:ios:e27f7fe0ace89c1abfcfcc"
+                    }
+                }
+            }
+        }
+    }
+}
