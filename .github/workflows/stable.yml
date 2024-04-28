@@ -16,16 +16,13 @@ jobs:
   bump-version:
     if: github.event.inputs.bump-version-after-release == 'true'
     runs-on: ubuntu-22.04
-    permissions: {
-        contents: write,
-        pull-requests: write,
-    }
+    permissions: { contents: write, pull-requests: write }
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
         with:
-            fetch-depth: 0
+          fetch-depth: 0
       - uses: dart-lang/setup-dart@v1
 
       - name: Install cider
@@ -38,10 +35,12 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
 
+      - name: Pull Latest Changes
+        run: git pull origin ${GITHUB_REF##*/} --rebase
+
       - name: Bump version
         working-directory: flutter_macos_flavors
         run: |
-          git pull
           VERSION=$(cider bump patch)
           echo "New version: $VERSION"
           BRANCH_NAME=pump-version-$VERSION
@@ -50,4 +49,6 @@ jobs:
           git add pubspec.yaml
           git commit -m "Bump app version to $VERSION"
           git push --set-upstream origin $BRANCH_NAME
-          gh pr create --fill
+
+      - name: Create Pull Request
+        run: gh pr create --fill
