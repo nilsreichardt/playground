@@ -1,0 +1,37 @@
+name: stable
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump-version-after-release:
+        type: boolean
+        description: |
+          Whether to bump the version after the release. TestFlight versions need
+          to be newer than the App Store versions. This is why we need to bump the
+          version after the stable release.
+
+permissions: {}
+
+jobs:
+  bump-version:
+    if: github.event.inputs.bump-version-after-release == 'true'
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Install cider
+        run: dart pub global activate cider 0.2.7
+
+      - name: Bump version
+        working-directory: flutter_macos_flavors
+        run: |
+          VERSION=$(cider bump patch)
+          echo "New version: $VERSION"
+          BRANCH_NAME=pump-version-$VERSION
+          echo "BRANCH_NAME=$(echo pump-version-$VERSION)" >> $GITHUB_ENV
+          git checkout -b $BRANCH_NAME
+          git add pubspec.yaml
+          git commit -m "Bump app version to $VERSION"
+          git push --set-upstream origin $BRANCH_NAME
+          gh pr create --fill
