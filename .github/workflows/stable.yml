@@ -10,12 +10,18 @@ on:
           to be newer than the App Store versions. This is why we need to bump the
           version after the stable release.
 
+permissions: {}
+
 jobs:
   bump-version:
     if: github.event.inputs.bump-version-after-release == 'true'
     runs-on: ubuntu-22.04
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions: {
+        contents: write,
+        pull-requests: write
+    }
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
@@ -23,23 +29,14 @@ jobs:
       - name: Install cider
         run: dart pub global activate cider 0.2.7
 
-      # Copied email address of GitHub Actions user from:
-      # https://github.community/t/github-actions-bot-email-address/17204/6
-      - name: Set GitHub Actions as Git user
-        run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-
       - name: Bump version
         working-directory: flutter_macos_flavors
         run: |
           VERSION=$(cider bump patch)
           echo "New version: $VERSION"
-          BRANCH_NAME=pump-version-$VERSION
-          echo "BRANCH_NAME=$(echo pump-version-$VERSION)" >> $GITHUB_ENV
-          git checkout -b $BRANCH_NAME
+          git checkout -b "pump-version-$VERSION"
           git add pubspec.yaml
           git commit -m "Bump app version to $VERSION"
 
       - name: Create Pull Request
-        run: gh pr create -B main -H $BRANCH_NAME --fill
+        run: gh pr create --fill
