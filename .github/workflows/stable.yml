@@ -10,13 +10,10 @@ on:
           to be newer than the App Store versions. This is why we need to bump the
           version after the stable release.
 
-permissions: {}
-
 jobs:
   bump-version:
     if: github.event.inputs.bump-version-after-release == 'true'
     runs-on: ubuntu-22.04
-    permissions: { contents: write, pull-requests: write }
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
