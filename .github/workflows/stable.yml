@@ -17,7 +17,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
 
       - name: Install cider
@@ -29,6 +29,11 @@ jobs:
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+
+      - name: Checkout to main
+        run: |
+          git pull origin main
+          git checkout main
 
       - name: Bump version
         working-directory: flutter_macos_flavors
