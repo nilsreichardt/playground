@@ -45,4 +45,4 @@ jobs:
           git checkout -b $BRANCH_NAME
           git add pubspec.yaml
           git commit -m "Bump app version to $VERSION"
-          gh pr create --fill --head $BRANCH_NAME --base main
+          gh pr create -B main -H $BRANCH_NAME --fill
