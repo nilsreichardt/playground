@@ -41,6 +41,7 @@ jobs:
       - name: Bump version
         working-directory: flutter_macos_flavors
         run: |
+          git pull
           VERSION=$(cider bump patch)
           echo "New version: $VERSION"
           BRANCH_NAME=pump-version-$VERSION
