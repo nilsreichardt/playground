@@ -35,8 +35,8 @@ jobs:
         run: |
           VERSION=$(cider bump patch)
           echo "New version: $VERSION"
-          BRANCH_NAME=pump-version-$VERSION-2
-          echo "BRANCH_NAME=$(echo pump-version-$VERSION-2)" >> $GITHUB_ENV
+          BRANCH_NAME=pump-version
+          echo "BRANCH_NAME=$(echo pump-version)" >> $GITHUB_ENV
           git checkout -b $BRANCH_NAME
           git add pubspec.yaml
           git commit -m "Bump app version to $VERSION"
