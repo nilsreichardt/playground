@@ -3,9 +3,6 @@ name: test
 on:
   push:
 
-env:
-  FLUTTER_VERSION: "3.3.4"
-
 jobs:
   integration-test:
     runs-on: macos-latest
@@ -14,7 +11,7 @@ jobs:
     - name: Install Flutter
       uses: subosito/flutter-action@v1
       with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: master
     - name: Run Integration Test
       working-directory: integration_test_timeout 
-      run: flutter test integration_test -d macos --timeout 3600s
+      run: flutter test integration_test -d macos --ignore-timeouts
