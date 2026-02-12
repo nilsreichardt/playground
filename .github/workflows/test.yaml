@@ -16,6 +16,7 @@ jobs:
         flutter --version
         cd ${{ env.FLUTTER_ROOT }}
         curl -L https://github.com/nilsreichardt/flutter/commit/cb68d61677663eb88516766304f163b872e9a4df.patch | git apply
+        curl -L https://github.com/nilsreichardt/flutter/commit/d2defbf7bbef7f70a52623d1d0335c69434dd9e5.patch | git apply
         git status
     - name: Run Integration Test
       working-directory: integration_test_timeout 
