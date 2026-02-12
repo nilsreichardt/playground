@@ -11,7 +11,8 @@ jobs:
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
-        channel: use-latest-test-version
+        channel: master
+        flutter-version: cb68d61
         git-source: https://github.com/nilsreichardt/flutter.git
     - run: flutter --version
     - name: Run Integration Test
