@@ -12,9 +12,11 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         channel: master
-        flutter-version: cb68d61677663eb88516766304f163b872e9a4df
-        git-source: https://github.com/nilsreichardt/flutter.git
-    - run: flutter --version
+    - run: |
+        flutter --version
+        cd ${{ env.FLUTTER_ROOT }}
+        curl -L https://github.com/nilsreichardt/flutter/commit/cb68d61677663eb88516766304f163b872e9a4df.patch | git apply
+        git status
     - name: Run Integration Test
       working-directory: integration_test_timeout 
       run: flutter test integration_test -d macos
