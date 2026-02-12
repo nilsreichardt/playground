@@ -12,7 +12,7 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         channel: master
-        flutter-version: cb68d61
+        flutter-version: cb68d61677663eb88516766304f163b872e9a4df
         git-source: https://github.com/nilsreichardt/flutter.git
     - run: flutter --version
     - name: Run Integration Test
