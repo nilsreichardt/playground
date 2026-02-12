@@ -9,9 +9,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Flutter
-      uses: subosito/flutter-action@v1
+      uses: subosito/flutter-action@v2
       with:
-        channel: master
+        channel: use-latest-test-version
+        git-source: https://github.com/nilsreichardt/flutter.git
+    - run: flutter --version
     - name: Run Integration Test
       working-directory: integration_test_timeout 
       run: flutter test integration_test -d macos
